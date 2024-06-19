@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         // Parse the request body
-        const { username, password, firstname, lastname, department, img, role } = await req.json();
+        const { email, password, firstname, lastname, department, img, role } = await req.json();
 
         // Ensure password is provided
         if (!password) {
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         // Create the user in the database
         const user = await prisma.user.create({
             data: {
-                username,
+                email,
                 password: hashedPassword,
                 firstname,
                 lastname,
@@ -52,7 +52,7 @@ export async function PUT(req: Request) {
     try {
         // Parse the request body and url parameters
         const { id } = await req.json();
-        const { username, password, firstname, lastname, department, img, role } = await req.json();
+        const { email, password, firstname, lastname, department, img, role } = await req.json();
 
         // Fetch the user to be updated
         const user = await prisma.user.findUnique({ where: { id } });
@@ -71,7 +71,7 @@ export async function PUT(req: Request) {
         const updatedUser = await prisma.user.update({
             where: { id },
             data: {
-                username,
+                email,
                 password: hashedPassword || user.password,
                 firstname,
                 lastname,

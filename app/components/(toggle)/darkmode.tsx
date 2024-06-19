@@ -6,7 +6,7 @@ interface DarkmodePageProps {
 
 export const DarkmodePage: React.FC<DarkmodePageProps> = ({ setClassMode })=> {
     return (
-        <div>
+        <div className="absolute">
             <button onClick={() => setClassMode('light')}>
                 Set Light Mode
             </button>
